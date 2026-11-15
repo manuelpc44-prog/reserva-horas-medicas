@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Servicio web estático de reserva de horas médicas (proyecto académico DevOps).">
+  <title>Clínica Vida Sana | Reserva de horas médicas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1>Clínica Vida Sana</h1>
+      <p class="tagline">Reserva de horas médicas en línea</p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="card" aria-labelledby="titulo-form">
+      <h2 id="titulo-form">Solicitar una hora médica</h2>
+      <p class="note">Formulario de demostración: los datos <strong>no se envían ni se almacenan</strong>. No ingreses información personal real.</p>
+
+      <form id="form-reserva" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre del paciente (ficticio)</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej.: Paciente de Prueba" required>
+        </div>
+
+        <div class="field">
+          <label for="correo">Correo de contacto (ficticio)</label>
+          <input type="email" id="correo" name="correo" placeholder="paciente@ejemplo.com" required>
+        </div>
+
+        <div class="field">
+          <label for="especialidad">Especialidad</label>
+          <select id="especialidad" name="especialidad" required>
+            <option value="">Selecciona una opción</option>
+            <option>Medicina general</option>
+            <option>Pediatría</option>
+            <option>Cardiología</option>
+            <option>Dermatología</option>
+            <option>Ginecología</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="fecha">Fecha preferida</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div class="field">
+            <label for="hora">Horario</label>
+            <select id="hora" name="hora" required>
+              <option value="">Selecciona</option>
+              <option>09:00</option>
+              <option>10:30</option>
+              <option>12:00</option>
+              <option>15:00</option>
+              <option>16:30</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="motivo">Motivo de la consulta (opcional)</label>
+          <textarea id="motivo" name="motivo" rows="3" placeholder="Describe brevemente el motivo (sin datos sensibles)"></textarea>
+        </div>
+
+        <button type="submit" class="btn">Reservar hora</button>
+        <p id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></p>
+      </form>
+    </section>
+
+    <aside class="side">
+      <section class="card" aria-labelledby="titulo-estado">
+        <h2 id="titulo-estado">Estado del servicio</h2>
+        <p><span class="badge ok" id="estado-servicio">● Operativo</span></p>
+        <ul class="info-list">
+          <li><strong>Entorno:</strong> local (Docker + Nginx)</li>
+          <li><strong>Puerto:</strong> 8080</li>
+          <li><strong>Versión:</strong> 1.0.0</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="titulo-atencion">
+        <h2 id="titulo-atencion">Datos generales de atención</h2>
+        <table class="horarios">
+          <thead>
+            <tr><th>Día</th><th>Horario</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lunes a viernes</td><td>08:00 – 19:00</td></tr>
+            <tr><td>Sábado</td><td>09:00 – 13:00</td></tr>
+            <tr><td>Domingo y festivos</td><td>Solo urgencias</td></tr>
+          </tbody>
+        </table>
+        <ul class="info-list">
+          <li><strong>Dirección:</strong> Av. Ejemplo 1234, Santiago (ficticia)</li>
+          <li><strong>Teléfono:</strong> +56 2 0000 0000 (ficticio)</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Proyecto académico DevOps – IACC 2026. Sitio estático servido con Nginx en Docker. Sin base de datos ni API.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simulación en el navegador: no se envía ninguna información a un servidor.
+    (function () {
+      var form = document.getElementById('form-reserva');
+      var msg = document.getElementById('mensaje');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          msg.textContent = 'Completa los campos obligatorios para continuar.';
+          msg.className = 'mensaje error';
+        } else {
+          msg.textContent = 'Solicitud simulada correctamente. Este sitio es una demostración y no guarda datos.';
+          msg.className = 'mensaje exito';
+          form.reset();
+        }
+        msg.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>

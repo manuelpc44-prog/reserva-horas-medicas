@@ -1,0 +1,27 @@
+# Variables de entorno reales y secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.secret
+secrets/
+
+# Logs y temporales
+*.log
+logs/
+tmp/
+
+# Dependencias y artefactos de compilación
+node_modules/
+dist/
+build/
+
+# Archivos del sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Archivos comprimidos y evidencias locales pesadas
+*.zip

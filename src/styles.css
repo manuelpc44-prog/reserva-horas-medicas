@@ -1,0 +1,89 @@
+:root {
+  --verde: #00a66e;
+  --verde-oscuro: #007a52;
+  --texto: #333334;
+  --fondo: #f4f7f6;
+  --borde: #d5dedb;
+  --blanco: #ffffff;
+  --error: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+  line-height: 1.5;
+}
+
+.container { width: min(1000px, 92%); margin: 0 auto; }
+
+.site-header { background: var(--verde); color: var(--blanco); padding: 1.5rem 0; }
+.site-header h1 { margin: 0; font-size: 1.8rem; }
+.tagline { margin: .25rem 0 0; opacity: .95; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.card h2 { margin-top: 0; font-size: 1.25rem; color: var(--verde-oscuro); }
+
+.note { font-size: .9rem; background: #eef8f4; border-left: 4px solid var(--verde); padding: .6rem .8rem; border-radius: 4px; }
+
+.field { display: flex; flex-direction: column; margin-bottom: 1rem; flex: 1; }
+.row { display: flex; gap: 1rem; }
+label { font-weight: 600; margin-bottom: .3rem; font-size: .95rem; }
+
+input, select, textarea {
+  font: inherit;
+  padding: .55rem .7rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: var(--blanco);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--verde); border-color: var(--verde); }
+
+.btn {
+  background: var(--verde);
+  color: var(--blanco);
+  border: 0;
+  padding: .7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--verde-oscuro); }
+
+.mensaje { margin-top: 1rem; padding: .6rem .8rem; border-radius: 6px; }
+.mensaje.exito { background: #e3f6ed; color: #0b5b3b; }
+.mensaje.error { background: #fdeceb; color: var(--error); }
+
+.badge { display: inline-block; padding: .25rem .7rem; border-radius: 999px; font-weight: 600; font-size: .9rem; }
+.badge.ok { background: #e3f6ed; color: #0b5b3b; }
+
+.info-list { padding-left: 1.1rem; margin: .5rem 0 0; }
+
+.horarios { width: 100%; border-collapse: collapse; font-size: .92rem; margin-bottom: .5rem; }
+.horarios th, .horarios td { border-bottom: 1px solid var(--borde); padding: .4rem .3rem; text-align: left; }
+.horarios th { color: var(--verde-oscuro); }
+
+.site-footer { background: #1f2d29; color: #d7e3df; padding: 1rem 0; font-size: .85rem; text-align: center; }
+
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .row { flex-direction: column; gap: 0; }
+}

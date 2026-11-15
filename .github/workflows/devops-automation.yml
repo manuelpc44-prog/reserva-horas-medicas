@@ -1,0 +1,53 @@
+name: DevOps Automation
+
+# Se ejecuta en cada push o pull request hacia main (validación y trazabilidad)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  validar-y-construir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Validar archivos obligatorios
+        run: |
+          for f in src/index.html src/styles.css Dockerfile docker-compose.yml .env.example .gitignore README.md; do
+            test -f "$f" || { echo "Falta el archivo obligatorio: $f"; exit 1; }
+            echo "OK: $f"
+          done
+
+      - name: Verificar que no se versione un archivo .env real
+        run: |
+          if git ls-files --error-unmatch .env 2>/dev/null; then
+            echo "ERROR: .env no debe estar versionado"; exit 1
+          fi
+          echo "OK: .env no está versionado"
+
+      - name: Validar sintaxis de docker-compose
+        run: docker compose config --quiet
+
+      - name: Construir imagen Docker (Nginx)
+        run: docker build -t reserva-horas-medicas:ci .
+
+      - name: Ejecutar contenedor y probar servicio
+        run: |
+          docker run -d --name web-ci -p 8080:80 reserva-horas-medicas:ci
+          sleep 5
+          curl -fsS http://localhost:8080/ | grep -q "Reserva de horas médicas"
+          echo "Servicio responde correctamente"
+
+      - name: Mostrar logs del contenedor
+        if: always()
+        run: docker logs web-ci
+
+      - name: Detener contenedor
+        if: always()
+        run: docker rm -f web-ci

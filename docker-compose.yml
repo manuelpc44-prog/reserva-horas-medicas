@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: reserva-horas-medicas:1.0.0
+    container_name: reserva-horas-web
+    ports:
+      # Puerto local configurable por .env (por defecto 8080)
+      - "${HOST_PORT:-8080}:80"
+    environment:
+      - APP_ENV=${APP_ENV:-local}
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
