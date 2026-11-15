@@ -34,7 +34,7 @@ reserva-horas-medicas/
 ## Instalación
 
 ```bash
-git clone https://github.com/<usuario>/reserva-horas-medicas.git
+git clone https://github.com/manuelpc44-prog/reserva-horas-medicas.git
 cd reserva-horas-medicas
 cp .env.example .env      # Opcional: solo si deseas cambiar el puerto
 ```
