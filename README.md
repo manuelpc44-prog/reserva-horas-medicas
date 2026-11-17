@@ -15,6 +15,7 @@ reserva-horas-medicas/
 ├── src/
 │   ├── index.html            # Página con formulario, datos de atención y estado del servicio
 │   └── styles.css            # Hoja de estilos
+│   └── favicon.ico           # icono titulo 
 ├── Dockerfile                # Imagen basada en nginx:alpine
 ├── docker-compose.yml        # Levanta el servicio en el puerto 8080
 ├── .env.example              # Variables de ejemplo (sin valores sensibles)
